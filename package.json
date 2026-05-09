@@ -1,0 +1,16 @@
+{
+  "name": "complete-graph-project-context-mapper",
+  "version": "1.0.0",
+  "description": "Analyzes your JavaScript/TypeScript project and builds a complete dependency graph, resolving every import, extracting exports, and generating an AI-ready context map.",
+  "main": "./src/mapper.js",
+  "type": "commonjs",
+  "bin": {
+    "context": "./src/mapper.js"
+  },
+  "scripts": {
+    "start": "node ./src/mapper.js"
+  },
+  "keywords": ["dependency", "graph", "javascript", "typescript", "analysis"],
+  "license": "MIT",
+  "author": ""
+}
