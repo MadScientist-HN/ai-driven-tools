@@ -9,6 +9,10 @@
 [![Module](https://img.shields.io/badge/Module-CommonJS-orange)](https://nodejs.org/api/modules.html)
 [![Zero deps](https://img.shields.io/badge/Dependencies-Zero-brightgreen)](#)
 
+### 🚀 Support This Project
+
+[💝 Help us reach more developers! Support our campaign](https://4fund.com/bjmuvm)
+
 ---
 
 *Analyzes your JavaScript/TypeScript project and builds a complete dependency graph,
@@ -40,11 +44,11 @@ resolviendo cada import, extrayendo exports y generando un mapa de contexto list
 
 **English**
 
-`context.js` walks your entire project tree and produces a rich, structured map of every file and every relationship between them. It tells you not just *what* is imported, but *from where* it resolves to on disk, what kind of dependency it is, and whether it could actually be found.
+`mapper.js` walks your entire project tree and produces a rich, structured map of every file and every relationship between them. It tells you not just *what* is imported, but *from where* it resolves to on disk, what kind of dependency it is, and whether it could actually be found.
 
 **Español**
 
-`context.js` recorre todo tu árbol de proyecto y produce un mapa estructurado de cada archivo y cada relación entre ellos. No solo dice *qué* se importa, sino *desde dónde* se resuelve en disco, qué tipo de dependencia es, y si realmente puede encontrarse.
+`mapper.js` recorre todo tu árbol de proyecto y produce un mapa estructurado de cada archivo y cada relación entre ellos. No solo dice *qué* se importa, sino *desde dónde* se resuelve en disco, qué tipo de dependencia es, y si realmente puede encontrarse.
 
 | Capability · Capacidad | Details · Detalles |
 |---|---|
@@ -87,13 +91,13 @@ resolviendo cada import, extrayendo exports y generando un mapa de contexto list
 
 ## 📦 Installation · Instalación
 
-No external dependencies. Copy `context.js` to your project and require it.
+No external dependencies. Copy `mapper.js` to your project and require it.
 
-Sin dependencias externas. Copia `context.js` a tu proyecto y haz require.
+Sin dependencias externas. Copia `mapper.js` a tu proyecto y haz require.
 
 ```bash
 # Copy the file · Copia el archivo
-cp context.js ./tools/context.js
+cp src/mapper.js ./tools/mapper.js
 ```
 
 **Requirements · Requisitos:** Node.js 12+ (uses `fs`, `path`, `crypto` — all built-in)
@@ -105,7 +109,7 @@ cp context.js ./tools/context.js
 ### One-liner — Quick Analysis · Análisis Rápido
 
 ```js
-const { analyzeProject } = require('./context');
+const { analyzeProject } = require('./src/mapper');
 
 const data = await analyzeProject('./src');
 
@@ -117,7 +121,7 @@ console.log(`Circular deps: ${data.unresolved.length}`);
 ### Full Analysis + Save Files · Análisis Completo + Guardar Archivos
 
 ```js
-const { analyzeAndSave } = require('./context');
+const { analyzeAndSave } = require('./src/mapper');
 
 const result = await analyzeAndSave('./src', { outputDir: './reports' });
 // Prints stats table to console · Imprime tabla de estadísticas en consola
@@ -131,7 +135,7 @@ console.log(`MD  → ${result.files.mdPath}`);
 ### Class API — Full Control · Control Total
 
 ```js
-const { CompleteGraphMapper } = require('./context');
+const { CompleteGraphMapper } = require('./src/mapper');
 
 const mapper = new CompleteGraphMapper('./src', {
   verbose: true,
@@ -339,21 +343,21 @@ const mapper = new CompleteGraphMapper('./src', {
 
 ```bash
 # Analyze current directory · Analizar directorio actual
-node context.js
+node src/mapper.js
 
 # Analyze a specific path · Analizar una ruta específica
-node context.js ./src
+node src/mapper.js ./src
 
 # Verbose output · Salida detallada
-node context.js ./src --verbose
-node context.js ./src -v
+node src/mapper.js ./src --verbose
+node src/mapper.js ./src -v
 
 # Analyze without saving files · Analizar sin guardar archivos
-node context.js ./src --no-save
-node context.js ./src -n
+node src/mapper.js ./src --no-save
+node src/mapper.js ./src -n
 
 # Combine flags · Combinar flags
-node context.js ./src -v -n
+node src/mapper.js ./src -v -n
 ```
 
 **Console output example · Ejemplo de salida en consola:**
@@ -386,7 +390,7 @@ Statistics:
 ### Find all circular dependencies · Encontrar todas las dependencias circulares
 
 ```js
-const { CompleteGraphMapper } = require('./context');
+const { CompleteGraphMapper } = require('./src/mapper');
 
 const mapper = new CompleteGraphMapper('./src');
 await mapper.scan();
@@ -442,7 +446,7 @@ if (data.unresolved.length > 0) {
 ### Feed context into an LLM · Alimentar contexto a un LLM
 
 ```js
-const { CompleteGraphMapper } = require('./context');
+const { CompleteGraphMapper } = require('./src/mapper');
 
 const mapper = new CompleteGraphMapper('./src');
 await mapper.scan();
@@ -476,7 +480,7 @@ console.log(`Scanned ${data.stats.totalFiles} production files`);
 ## 🏗️ Architecture · Arquitectura
 
 ```
-context.js
+mapper.js
 │
 ├── CompleteGraphMapper (class)
 │   │
